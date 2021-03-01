@@ -9,7 +9,7 @@
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack-dev-server  --open:headless",
-    "testscript": "testcafe chrome:headless ./acceptance_tests/tests/qaChallenge.js",
+    "testscript": "testcafe chrome:headless ./acceptance_tests/tests/qaChallenge.js -s takeOnFails=true",
     "test": "concurrently \"npm start\" \"npm run testscript\""
   },
   "dependencies": {
