@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --open",
+    "start": "webpack-dev-server  --open:headless",
     "testscript": "testcafe chrome:headless ./acceptance_tests/tests/qaChallenge.js",
     "test": "concurrently \"npm start\" \"npm run testscript\""
   },
