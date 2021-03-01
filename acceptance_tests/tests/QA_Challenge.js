@@ -3,6 +3,9 @@ import xPathToCss from 'xpath-to-css'
 import loginpage from '../Pages/login_page'
 import registration_page from '../Pages/registration_page'
 import dashboard_page from '../Pages/dashboard_page'
+import { ClientFunction } from 'testcafe';
+
+const getPageUrl = ClientFunction(() => window.location.href);
 const login_page = new loginpage()
 const registrationpage = new registration_page()
 const dashboardpage = new dashboard_page()
@@ -25,15 +28,13 @@ test(`A User can register in order to be able to login to the application`,async
 await t.click(login_page.register)
 
 //Assertion for checking if user has been directed to registration page
-await t.expect(registrationpage.register.innerText).contains('Register')
-// assertion for getpage url refer testcafe doc for client function
+await t.expect(registrationpage.register.innerText).contains('Register');
+//Assertion using URL
+await t.expect(getPageUrl()).contains('register');
+
 
 //Filling out the registration form
-<<<<<<< Updated upstream
 await t.typeText(registrationpage.firstname,'Aditya')
-=======
-await t.typeText(registrationpage.firstname,'Adi')
->>>>>>> Stashed changes
 await t.typeText(registrationpage.lastname,'Chaudhari')
 await t.typeText(registrationpage.username,'Adi')
 await t.typeText(registrationpage.password,'Password@123')
@@ -43,6 +44,9 @@ await t.click(registrationpage.submit_button)
 
 //Assertion for checking if user has been registered successfully
 await t.expect(login_page.reg_sucess.innerText).contains('Registration successful')
+//Assertion using URL
+await t.expect(getPageUrl()).contains('login');
+
 })
 
 
@@ -76,6 +80,8 @@ await t.wait(100)
 
 //Assertion for checking if user is directed to homepage after enting valid credentials
 await t.expect(dashboardpage.login_sucess.innerText).contains("You're logged in with React!!")
+//Assertion using URL
+await t.expect(getPageUrl()).contains('localhost');
 })
 
 //Test for Delete user profile functionality
@@ -109,4 +115,6 @@ await t.click(dashboardpage.logout)
 
 //Assertion if user is redirected to login page after clicking on logout option
 await t.expect(login_page.logintext.innerText).contains('Login')
+//Assertion using URL
+await t.expect(getPageUrl()).contains('login');
 })
